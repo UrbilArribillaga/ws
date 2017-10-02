@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>js-rekin proba</title>
+        <style>
+            h1 {
+                color: rgb(133, 133, 0);
+            }
+            label {
+                color: blue;
+                font-size: 150%;
+            }
+            textarea {
+                width:200px;
+                height: 20px;
+                
+            }
+            button {
+                padding: 10px 40px;
+            }
+            #zuzenketa{
+                color: green;
+                font-size:200%;
+                background-color:yellow;
+            }
+        </style>
+         
+    </head>
+    <body>
+    <form>
+	
+        <h1>2 zenbakien arteko eragiketa</h1>
+        <Label>Lehen zenbakia: </Label>
+        <textarea id="textarea"> </textarea><br/><br/>
+        <Label>Aukeratu eragiketa: </Label>
+        <select id ="sel"> 
+            <option selected="selected">+</option>
+            <option>-</option>
+            <option>*</option>
+            <option>/</option>
+        </select><br/><br/>
+        <label>Bigarren zenbakia: </label>
+        <textarea id="textarea1"> </textarea><br/><br/>
+        <label>Emaitza sartu: </label>
+        <textarea id="textarea2"> </textarea><br/><br/>
+        <button id= "botoiEgiaztatu" type="button">
+            Egiaztatu
+        </button>
+        <button id= "botoiBorratu" type="button"></button>
+            Borratu
+        </button><br/>
+        <label id="zuzenketa"></label>
+        
+       </form>
+       <script>
+            var buttonBor = document.getElementById("botoiBorratu")
+            var botoiklikatu1 = function(){
+                document.getElementById("textarea").value = "";
+                document.getElementById("textarea1").value = "";
+                document.getElementById("textarea2").value = "";
+                document.getElementById("sel").getElementsByTagName('option')[0].selected = true;
+                var zuzendu = document.getElementById("zuzenketa").innerHTML=""
+            }
+            buttonBor.addEventListener("click", botoiklikatu1)
+			var buttonEgiaz = document.getElementById("botoiEgiaztatu")
+            var botoiklikatu = function(){
+                
+                
+                var lehenZenb = Number(document.getElementById("textarea").value)
+                var e = document.getElementById("sel").value
+                
+                var bigZenb = Number(document.getElementById("textarea1").value)
+                var Emaitza = document.getElementById("textarea2").value
+                var x
+                if(e == "+")  x = lehenZenb + bigZenb
+                if(e == "-")  x = lehenZenb - bigZenb
+                if(e == "*")  x = lehenZenb * bigZenb
+                if(e == "/")  x = lehenZenb / bigZenb
+                var zuzendu= document.getElementById("zuzenketa");
+                if(x == Number(Emaitza)) zuzendu.innerHTML="ONDO"
+                else zuzendu.innerHTML="GAIZKI"
+                
+            }
+			buttonEgiaz.addEventListener("click", botoiklikatu)
+            
+            
+        </script>
+    </body>
+</html>

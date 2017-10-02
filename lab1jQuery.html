@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"> </script>
+        <meta charset="utf-8">
+        <title>jquery-rekin proba</title>
+        <style>
+            h1 {
+                color: rgb(133, 133, 0);
+            }
+            label {
+                color: blue;
+                font-size: 150%;
+            }
+            textarea {
+                width:200px;
+                height: 20px;
+                
+            }
+            button {
+                padding: 10px 40px;
+            }
+            #zuzenketa{
+                color: green;
+                font-size:200%;
+                background-color:yellow;
+            }
+        </style>
+         
+    </head>
+    <body>
+        <!--<form action="">-->
+        <h1>2 zenbakien arteko eragiketa</h1>
+        <Label>Lehen zenbakia: </Label>
+        <textarea id="textarea"> </textarea><br/><br/>
+        <Label>Aukeratu eragiketa: </Label>
+        <select id ="sel"> 
+            <option selected="selected">+</option>
+            <option>-</option>
+            <option>*</option>
+            <option>/</option>
+        </select><br/><br/>
+        <label>Bigarren zenbakia: </label>
+        <textarea id="textarea1"> </textarea><br/><br/>
+        <label>Emaitza sartu: </label>
+        <textarea id="textarea2"> </textarea><br/><br/>
+        <button id= "botoiEgiaztatu" type="button">
+            Egiaztatu
+        </button>
+        <button id= "botoiBorratu" type="button">
+            Borratu
+        </button><br/>
+        <label id="zuzenketa"></label>
+        
+       <!--</form>-->
+       <script>
+       $(document).ready(function(){
+            $("#botoiEgiaztatu").click(function(){
+            
+});
+$("#botoiBorratu").click(function(){
+$("textarea").val(' ');
+$("#sel").prop('selectedIndex', 0);
+$("#zuzenketa").text(' ')
+});
+$("#botoiEgiaztatu").click(function(){
+var e = $("#sel").val();
+var z1= Number($("#textarea").val());
+var z2= Number($("#textarea1").val());
+var ema= $("#textarea2").val();
+var x
+if(e == "+")x=z1 + z2
+if(e == "-")x=z1 -z2
+if(e == "*")x=z1 *z2
+if(e == "/")x=z1 /z2
+console.log("ema:")
+console.log(ema)
+console.log("x")
+console.log(x)
+if(ema==x) $("#zuzenketa").text('ondo')
+else $("#zuzenketa").text('gaizki')
+});
+});
+    </script>
+    </body>
+</html>
+
