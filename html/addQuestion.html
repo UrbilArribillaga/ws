@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <meta name="tipo_contenido" content="text/html;" http-equiv="content-type" charset="utf-8">
+	<title>Galderak gehitu</title>
+	<style>
+	input {
+	    float:right;
+	    margin-right:115em;
+	    width:10%;
+	}
+	</style>
+  </head>
+  <body>
+		<form id="galderenF" name="galderenF" action="proba.php">
+			<label>Korreoa</label><input id="korreoa" type="text"><br/><br/>
+			<label >Galdera</label> <input id ="galdera" type="text" ><br/><br/>
+			<label>Erantzun zuzena </label><input id="zuzena"type="text" ><br/><br/>
+			<label>Erantzun okerra 1</label><input id="oker1"type="text"><br/><br/>
+			<label>Erantzun okerra 2</label><input id="oker2"type="text" ><br/><br/>
+			<label>Erantzun okerra 3</label><input id="oker3"type="text" ><br/><br/>
+			<label>Galderaren zailtasuna</label><input id="zailtasuna" type="text" ><br/><br/>
+			<label>Galderaren gai arloa</label><input id="arloa" type="text" ><br/><br/><br/>
+			<input id="botoiErantzuna" type="button" value="erantzuna sartu">
+			<input id="botoiAtera" type="button" value="atzera"><br/><br/>
+		<label id="etiketa"></label>
+		</form>
+</body>
+<script>
+    
+    $(document).ready(function(){
+        $("#botoiErantzuna").click(function(){
+            var emailRegex = /^[a-z]{3,}[0-9][0-9][0-9]+@ikasle\.ehu\.(?:eus|es)$/
+            var zailtasunaRegex = /^[1-5]{1}$/
+            var korreo = $("#korreoa").val().match(emailRegex) ==  $("#korreoa").val() 
+            var zailtasun = $("#zailtasuna").val().match(zailtasunaRegex) == $("#zailtasuna").val()
+            var gald = $.trim($("#galdera").val()).length > 10
+            var zuzen = $.trim($("#zuzena").val()).length > 0
+            var ok1 = $.trim($("#oker1").val()).length >0
+            var ok2 = $.trim($("#oker2").val()).length >0
+            var ok3 = $.trim($("#oker3").val()).length >0
+            var arlo =$.trim($("#arloa").val()).length >0
+  var boolean = true
+           if(!korreo){
+               boolean =false
+			   alert("korreo okerra")
+               $("#korreoa").css("background-color", "red")
+           }
+           if(!gald){
+               boolean =false
+			   alert("galdera gaizki egina")
+               $("#galdera").css("background-color", "red")
+           }
+           if(!zailtasun){
+               boolean =false
+               $("#zailtasuna").css("background-color", "red")
+           }
+           if(!zuzen){
+               boolean =false
+               $("#zuzena").css("background-color", "red")
+           }
+           if(!ok1){
+               boolean =false
+               $("#oker1").css("background-color", "red")
+           }
+           if(!ok2){
+               boolean =false
+               $("#oker2").css("background-color", "red")
+           }
+           if(!ok3){
+               boolean =false
+               $("#oker3").css("background-color", "red")
+           }
+           if(!arlo){
+               boolean = false
+               $("#arloa").css("background-color", "red")
+           }
+           
+           if(boolean){
+               location.href="http://localhost:1234/laborategiak/html/layout.html"
+           }
+        });
+		$("#botoiAtera").click(function(){
+		 location.href="http://localhost:1234/laborategiak/html/layout.html"
+		});
+        
+    });
+</script>
+</html>
+
