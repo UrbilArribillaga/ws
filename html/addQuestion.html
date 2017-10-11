@@ -23,8 +23,7 @@
 			<label>Galderaren zailtasuna</label><input id="zailtasuna" type="text" ><br/><br/>
 			<label>Galderaren gai arloa</label><input id="arloa" type="text" ><br/><br/><br/>
 			<input id="botoiErantzuna" type="button" value="erantzuna sartu">
-			<input id="botoiAtera" type="button" value="atzera"><br/><br/>
-		<label id="etiketa"></label>
+			<input id="botoiAtera" type="button" value="atzera"></br></br>
 		</form>
 </body>
 <script>
@@ -44,12 +43,10 @@
   var boolean = true
            if(!korreo){
                boolean =false
-			   alert("korreo okerra")
                $("#korreoa").css("background-color", "red")
            }
            if(!gald){
                boolean =false
-			   alert("galdera gaizki egina")
                $("#galdera").css("background-color", "red")
            }
            if(!zailtasun){
@@ -78,11 +75,11 @@
            }
            
            if(boolean){
-               location.href="http://localhost:1234/laborategiak/html/layout.html"
+               location.href="http://uarribillaga.000webhostapp.com/Lab2/layout.html"
            }
         });
 		$("#botoiAtera").click(function(){
-		 location.href="http://localhost:1234/laborategiak/html/layout.html"
+		 location.href="http://uarribillaga.000webhostapp.com/Lab2/layout.html"
 		});
         
     });
