@@ -15,22 +15,21 @@
 		   href='http://uarribillaga.000webhostapp.com/Lab2/estiloak/smartphone.css' />
   </head>
   <body>
-  <form>
+  <form id="layout" name="layout" action="" method="post">
   </br>
   <input id="botoiErregistratu" type="button" value="Erregistratu">
   <input id="botoiLogin" type="button" value="LogIn">
   <input id="botoiAtera" type="button" value="LogOut"></input></br></br>
   <div id='page-wrap'>
 	<header class='main' id='h1'>
-      <span class="right"><a href="/login">LogIn</a> </span>
       <span class="right" style="display:none;"><a href="/logout">LogOut</a> </span>
 	<h2>Quiz: crazy questions</h2>
     </header>
 	<nav class='main' id='n1' role='navigation'>
-		<span><a href='layout.html'>Home</a></span>
+		<span><a href='layout.php'>Home</a></span>
 		<span><a href='/quizzes'>Quizzes</a></span>
-		<span><a href='http://localhost:1234/laborategiak/html/credits.html'>Credits</a></span>
-		<span><a href= 'http://localhost:1234/laborategiak/php/addQuestion.php'>Galdera gehitu</a></span>
+		<span><a href='credits.html'>Credits</a></span>
+		<span><input id="galderaGehitu" type="submit" name="galderaGehitu" value="Galdera gehitu"></span>
 	</nav>
     <section class="main" id="s1">
     
@@ -48,13 +47,13 @@
 <script>
 $(document).ready(function(){
         $("#botoiErregistratu").click(function(){
-		location.href="http://localhost:1234/laborategiak/php/signUp.php"
+		location.href="signUp.php"
 		});
 		$("#botoiLogin").click(function(){
-		location.href="http://localhost:1234/laborategiak/php/logIn.php"
+		location.href="logIn.php"
 		});
 		$("#botoiAtera").click(function(){
-		location.href="http://localhost:1234/laborategiak/php/logOut.php"
+		location.href="logOut.php"
 		});
         
     });
@@ -63,10 +62,21 @@ $(document).ready(function(){
 </html>
 <?php
 if(isset($_GET['id'])){
-echo('dena ondo');
+	echo '<style type="text/css">
+        #botoiErregistratu, #botoiLogin {
+            display: none;
+        }
+        </style>';		
 }
 else{
-echo('dena gaizki');
+	echo '<style type="text/css">
+        #galderaGehitu, #botoiAtera {
+            display: none;
+        }
+        </style>';
 }
-
+if(isset($_POST['galderaGehitu'], $_GET['id'])){
+	$id= $_GET['id'];
+	header('location: addQuestion.php?id='.$id);
+}
 ?>

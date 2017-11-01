@@ -1,4 +1,6 @@
 <?php 
+if(isset($_GET['id'])){
+	$id= $_GET['id'];
 $esteka = mysqli_connect("localhost", "id2977082_root", "12345", "id2977082_quiz");
 if (mysqli_connect_errno()) {
 echo ("Konexio hutxegitea MySQLra: " . mysqli_connect_error());
@@ -21,6 +23,9 @@ else{
 if (!$result)
 {
 echo("Errorea query-a gauzatzerakoan: ". mysqli_error($esteka));
+
+}
+echo('<a href="layout.php?id='.$id.'"> HASIERAKO ORRIRA ITZULTZEKO HEMEN KLIKATU </a></br></br>');
 mysqli_close($esteka);
 }
 ?>
