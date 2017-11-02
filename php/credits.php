@@ -31,20 +31,16 @@
         <h1>Egileak: Jokin Indias eta Urbil Arribillaga</h1>
         <h2>Software ingeniaritza, 3.maila</h2>
         <img src=" https://raw.githubusercontent.com/UrbilArribillaga/ws/master/irudiak/homer.jpg" height="450" width="300"/></br></br>
-		<input id="botoiAtera" type="submit" value="atzera">
+		<input id="botoiAtera" type="submit" value="atzera" name="botoiAtera">
 		</form>
-		<script>
-		$(document).ready(function(){
-		$("#botoiAtera").click(function(){
-		 location.href="layout.php"
-		});
-		});
-		</script>
     </body>
 </html>
 <?php
-if(isset($_GET['id'], $_POST['botoiAtera']){
+if(isset($_GET['id'], $_POST['botoiAtera'])){
 	$id=$_GET['id'];
 	echo('<script>location.href="layout.php?id='.$id.'"</script>');
+}
+if(isset($_POST['botoiAtera'])){
+	echo('<script>location.href="layout.php"</script>');
 }
 ?>

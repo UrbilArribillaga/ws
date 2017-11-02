@@ -28,7 +28,7 @@
 	<nav class='main' id='n1' role='navigation'>
 		<span><a href='layout.php'>Home</a></span>
 		<span><a href='/quizzes'>Quizzes</a></span>
-		<span><a href='credits.html'>Credits</a></span>
+		<span><input id="credits" name="credits" type= "submit" value="Credits"</span>
 		<span><input id="galderaGehitu" type="submit" name="galderaGehitu" value="Galdera gehitu"></span>
 	</nav>
     <section class="main" id="s1">
@@ -77,6 +77,13 @@ else{
 }
 if(isset($_POST['galderaGehitu'], $_GET['id'])){
 	$id= $_GET['id'];
-	echo('<script>location.href="addQuestion.php?id='.$row['ID'].'"</script>');
+	echo('<script>location.href="addQuestion.php?id='.$id.'"</script>');
+}
+if(isset($_POST['credits'], $_GET['id'])){
+	$id= $_GET['id'];
+	echo('<script>location.href="credits.php?id='.$id.'"</script>');
+}
+if(isset($_POST['credits'])){
+	echo('<script>location.href="credits.php"</script>');
 }
 ?>

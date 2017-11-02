@@ -7,7 +7,7 @@
   </head>
   <body>
 		<form id="galderenF" name="galderenF" action="" method="post">
-			<label>Korreoa</label><input id="korreoa" name="korreoa" type="text"><br/><br/>
+			<!--<label>Korreoa</label><input id="korreoa" name="korreoa" type="text"><br/><br/>-->
 			<label >Galdera</label> <input id ="galdera" name="galdera" type="text" ><br/><br/>
 			<label>Erantzun zuzena </label><input id="zuzena" name="zuzena" type="text" ><br/><br/>
 			<label>Erantzun okerra 1</label><input id="oker1" name="oker1" type="text"><br/><br/>
@@ -89,7 +89,7 @@
 </html>
 
 <?php 
-if (isset($_POST['korreoa'], $_POST['galdera'], $_POST['zuzena'], $_POST['oker1'], $_POST['oker2'], $_POST['oker3'], $_POST['zailtasuna'], $_POST['arloa'], $_POST['botoiErantzuna'], $_GET['id'] ))
+if (isset($_POST['galdera'], $_POST['zuzena'], $_POST['oker1'], $_POST['oker2'], $_POST['oker3'], $_POST['zailtasuna'], $_POST['arloa'], $_POST['botoiErantzuna'], $_GET['id'] ))
     {
 $id=$_GET['id'];
 $esteka = mysqli_connect("localhost", "id2977082_root", "12345", "id2977082_quiz");
@@ -99,10 +99,20 @@ exit();
 }
 $errorea = "GAIZKI SARTUTAKO DATUAK: ";
 $balioztatu = True;
-if(!preg_match('/[a-z]{3,}[0-9][0-9][0-9]+@ikasle\.ehu\.(?:eus|es)/', $_POST['korreoa'])){
+
+$sql = "SELECT Korreoa FROM erabiltzaileak WHERE ID='$id'";
+$ema = mysqli_query($esteka, $sql);
+if (!$ema)
+{
+echo("Errorea query-a gauzatzerakoan: ". mysqli_error($esteka));
+echo ('<a href="addQuestion.php?id=$id">formulariora itzultzeko klikatu hemen</a>');
+}
+$row = mysqli_fetch_assoc($ema);
+$korreoa= $row['Korreoa'];
+/*if(!preg_match('/[a-z]{3,}[0-9][0-9][0-9]+@ikasle\.ehu\.(?:eus|es)/', $_POST['korreoa'])){
 $balioztatu = False;
 $errorea .= " [Korreoa]"; 
-}
+}*/
 if(strlen(preg_replace('/\s+/', '', $_POST['galdera'])) < 10){
 	$balioztatu = False;
 	$errorea .= " [Galdera]";
@@ -134,7 +144,7 @@ if(strlen(preg_replace('/\s+/', '', $_POST['arloa'])) < 1){
 	$errorea .= " [arloa]";
 }
 if($balioztatu){
-$sql = "INSERT INTO questions VALUES(DEFAULT, '$_POST[korreoa]' , '$_POST[galdera]' , '$_POST[zuzena]' , '$_POST[oker1]' , '$_POST[oker2]' , '$_POST[oker3]' , '$_POST[zailtasuna]' , '$_POST[arloa]' )";
+$sql = "INSERT INTO questions VALUES(DEFAULT, '$korreoa' , '$_POST[galdera]' , '$_POST[zuzena]' , '$_POST[oker1]' , '$_POST[oker2]' , '$_POST[oker3]' , '$_POST[zailtasuna]' , '$_POST[arloa]' )";
 $ema = mysqli_query($esteka, $sql); 
 if (!$ema)
 {
