@@ -77,6 +77,6 @@ else{
 }
 if(isset($_POST['galderaGehitu'], $_GET['id'])){
 	$id= $_GET['id'];
-	header('location: addQuestion.php?id='.$id);
+	echo('<script>location.href="addQuestion.php?id='.$row['ID'].'"</script>');
 }
 ?>

@@ -160,7 +160,7 @@ mysqli_close($esteka);
 	}
 if(isset($_POST['botoiAtera'], $_GET['id'])){
 	$id=$_GET['id'];
-	header('Location: layout.php?id='.$id);
+	echo('<script>location.href="layout.php?id='.$id.'"</script>');
 }
 
 	
