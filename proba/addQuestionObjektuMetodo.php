@@ -92,22 +92,23 @@
 if (isset($_POST['galdera'], $_POST['zuzena'], $_POST['oker1'], $_POST['oker2'], $_POST['oker3'], $_POST['zailtasuna'], $_POST['arloa'], $_POST['botoiErantzuna'], $_GET['id'] ))
     {
 $id=$_GET['id'];
-$esteka = mysqli_connect("localhost", "id2977082_root", "12345", "id2977082_quiz");
-if (mysqli_connect_errno()) {
-echo ("Konexio hutxegitea MySQLra: " . mysqli_connect_error());
+$niremysqli = new mysqli("localhost", "root", "", "quiz");
+if ($niremysqli->connect_errno) {
+echo ("Konexio hutxegitea MySQLra: " . $niremysqli->connect_errno);
 exit();
 }
 $errorea = "GAIZKI SARTUTAKO DATUAK: ";
 $balioztatu = True;
 
 $sql = "SELECT Korreoa FROM erabiltzaileak WHERE ID='$id'";
-$ema = mysqli_query($esteka, $sql);
+$ema = $niremysqli->query($sql);
 if (!$ema)
 {
-echo("Errorea query-a gauzatzerakoan: ". mysqli_error($esteka));
+echo("Errorea query-a gauzatzerakoan: ". $niremysqli->errno);
 echo ('<a href="addQuestion.php?id=$id">formulariora itzultzeko klikatu hemen</a>');
 }
-$row = mysqli_fetch_assoc($ema);
+$ema->data_seek(0);
+$row = $ema->fetch_assoc();
 $korreoa= $row['Korreoa'];
 /*if(!preg_match('/[a-z]{3,}[0-9][0-9][0-9]+@ikasle\.ehu\.(?:eus|es)/', $_POST['korreoa'])){
 $balioztatu = False;
@@ -145,15 +146,15 @@ if(strlen(preg_replace('/\s+/', '', $_POST['arloa'])) < 1){
 }
 if($balioztatu){
 $sql = "INSERT INTO questions VALUES(DEFAULT, '$korreoa' , '$_POST[galdera]' , '$_POST[zuzena]' , '$_POST[oker1]' , '$_POST[oker2]' , '$_POST[oker3]' , '$_POST[zailtasuna]' , '$_POST[arloa]' )";
-$ema = mysqli_query($esteka, $sql); 
+$ema = $niremysqli->query($sql); 
 if (!$ema)
 {
-echo("Errorea query-a gauzatzerakoan: ". mysqli_error($esteka));
+echo("Errorea query-a gauzatzerakoan: ". $niremysqli->errno);
 echo ('<a href="addQuestion.php?id=$id">formulariora itzultzeko klikatu hemen</a>');
 }
 else{
 	echo('DATUAK ONDO GORDE DIRA</br></br>');
-	echo ('<a href="showQuestions.php?id='.$id.'">datubaseko datuak ikusteko klikatu hemen</a></br></br>');	
+	echo ('<a href="showQuestions.php?id='.$id.'">datubaseko datuak ikusteko klikatu hemen</a>');	
 }
 	
 }
@@ -164,14 +165,12 @@ else{
 	echo($errorea);
 	echo('<span style="color: red;">DATUAK EZ DIRA DATU BASEAN SARTU</span>');
 }
-
-mysqli_close($esteka);
-
-//XML fitxategian datuak txertatu
+$niremysqli->close();
 
 $xml = simplexml_load_file("../xml/questions.xml");
 
 $assessmentItem = $xml->addChild('assessmentItem');
+
 $assessmentItem->addAttribute('complexity',$_POST['zailtasuna']);
 $assessmentItem->addAttribute('subject',$_POST['arloa']);
 
@@ -185,17 +184,9 @@ $incorrectResponses = $assessmentItem->addChild('incorrectResponses');
 $incorrectResponses-> addChild('value',$_POST['oker1']);
 $incorrectResponses-> addChild('value',$_POST['oker2']);
 $incorrectResponses-> addChild('value',$_POST['oker3']);
-$xmlError = $xml->asXML('../xml/questions.xml');
-if (!$xmlError){
-	$errorea = '<span style="color: red;">' . $errorea; 
-	$errorea .= "</span></br>";
-	echo($errorea);
-	echo('<span style="color: red;">DATUAK EZ DIRA XML FITXATEGIAN SARTU</span>');
-}
-else{
-	echo('<a href="showXMLQuestions.php?id='.$id.'"> XML ikusteko hemen klikatu </a></br></br>');
-}
-
+echo $xml->asXML();
+$xml->asXML('../xml/questions.xml');
+echo('<a href="showXMLQuestions.php"> XML ikusteko hemen klikatu </a></br></br>');
 	
 	}
 if(isset($_POST['botoiAtera'], $_GET['id'])){
@@ -204,10 +195,10 @@ if(isset($_POST['botoiAtera'], $_GET['id'])){
 }
 
 
+//XML fitxategian datuak txertatu
 
 
-
-
+//$xml->asXML('questions.xml');
 
 	
 ?>
