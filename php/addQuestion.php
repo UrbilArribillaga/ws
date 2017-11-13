@@ -92,11 +92,9 @@
 if (isset($_POST['galdera'], $_POST['zuzena'], $_POST['oker1'], $_POST['oker2'], $_POST['oker3'], $_POST['zailtasuna'], $_POST['arloa'], $_POST['botoiErantzuna'], $_GET['id'] ))
     {
 $id=$_GET['id'];
-$esteka = mysqli_connect("localhost", "root", "", "quiz");
-if (mysqli_connect_errno()) {
-echo ("Konexio hutxegitea MySQLra: " . mysqli_connect_error());
-exit();
-}
+	$zenb=1;
+	include "configure.php";
+	global $esteka;
 $errorea = "GAIZKI SARTUTAKO DATUAK: ";
 $balioztatu = True;
 

@@ -24,11 +24,9 @@
 </html>
 <?php
 if (isset($_POST['korreoa']) && isset($_POST['pasahitza'])){
-	$esteka = mysqli_connect("localhost", "root", "", "quiz");
-	if (mysqli_connect_errno()) {
-		echo ("Konexio hutxegitea MySQLra: " . mysqli_connect_error());
-		exit();
-	}
+	$zenb=1;
+	include "configure.php";
+	global $esteka;
 	$korreoa = $_POST['korreoa'];
 	$sql = "SELECT ID, Pasahitza From erabiltzaileak WHERE Korreoa= '$korreoa'"; 
 	$result = mysqli_query($esteka, $sql);

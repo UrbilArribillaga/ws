@@ -1,5 +1,5 @@
 <?php
-	if($id==0){
+	if($zenb==0){
 		$esteka = mysqli_connect("localhost", "root", "", "quiz");
 	}
 	else{

@@ -81,7 +81,7 @@
 <?php
  
 if(isset($_POST['korreoa'], $_POST['deitura'], $_POST['nick'], $_POST['pasahitza'], $_POST['pasahitza2'])){
-	$id=0;
+	$zenb=1;
 	include "configure.php";
 	global $esteka;
 	$sql = "SELECT * FROM erabiltzaileak";
