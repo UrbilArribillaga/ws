@@ -81,9 +81,12 @@
 <?php
  
 if(isset($_POST['korreoa'], $_POST['deitura'], $_POST['nick'], $_POST['pasahitza'], $_POST['pasahitza2'])){
-	$id=0;
-	include "configure.php";
-	global $esteka;
+	
+	$esteka = mysqli_connect("localhost", "root", "12345", "quiz");
+	if (mysqli_connect_errno()) {
+		echo ("Konexio hutxegitea MySQLra: " . mysqli_connect_error());
+		exit();
+	}
 	$sql = "SELECT * FROM erabiltzaileak";
 	$ema = mysqli_query($esteka, $sql);
 	if (!$ema){

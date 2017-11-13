@@ -1,7 +1,7 @@
 <?php 
 if(isset($_GET['id'])){
 	$id= $_GET['id'];
-$esteka = mysqli_connect("localhost", "id2977082_root", "12345", "id2977082_quiz");
+$esteka = mysqli_connect("localhost", "root", "", "quiz");
 if (mysqli_connect_errno()) {
 echo ("Konexio hutxegitea MySQLra: " . mysqli_connect_error());
 exit();

@@ -92,7 +92,7 @@
 if (isset($_POST['galdera'], $_POST['zuzena'], $_POST['oker1'], $_POST['oker2'], $_POST['oker3'], $_POST['zailtasuna'], $_POST['arloa'], $_POST['botoiErantzuna'], $_GET['id'] ))
     {
 $id=$_GET['id'];
-$esteka = mysqli_connect("localhost", "id2977082_root", "12345", "id2977082_quiz");
+$esteka = mysqli_connect("localhost", "root", "", "quiz");
 if (mysqli_connect_errno()) {
 echo ("Konexio hutxegitea MySQLra: " . mysqli_connect_error());
 exit();
@@ -162,13 +162,13 @@ else{
 	$errorea = '<span style="color: red;">' . $errorea; 
 	$errorea .= "</span></br>";
 	echo($errorea);
-	echo('<span style="color: red;">DATUAK EZ DIRA DATU BASEAN SARTU</span>');
+	echo('<span style="color: red;">DATUAK EZ DIRA DATU BASEAN SARTU</span></br>');
 }
 
 mysqli_close($esteka);
 
 //XML fitxategian datuak txertatu
-
+if($balioztatu){
 $xml = simplexml_load_file("../xml/questions.xml");
 
 $assessmentItem = $xml->addChild('assessmentItem');
@@ -190,13 +190,16 @@ if (!$xmlError){
 	$errorea = '<span style="color: red;">' . $errorea; 
 	$errorea .= "</span></br>";
 	echo($errorea);
-	echo('<span style="color: red;">DATUAK EZ DIRA XML FITXATEGIAN SARTU</span>');
+	echo('<span style="color: red;">DATUAK EZ DIRA XML FITXATEGIAN SARTU</span></br>');
 }
 else{
 	echo('<a href="showXMLQuestions.php?id='.$id.'"> XML ikusteko hemen klikatu </a></br></br>');
 }
 
-	
+	}
+else{
+	echo('<span style="color: red;">DATUAK EZ DIRA XML FITXATEGIAN SARTU</span></br>');
+}	
 	}
 if(isset($_POST['botoiAtera'], $_GET['id'])){
 	$id=$_GET['id'];

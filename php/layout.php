@@ -22,13 +22,15 @@
   <input id="botoiAtera" type="button" value="LogOut"></input></br></br>
   <div id='page-wrap'>
 	<header class='main' id='h1'>
+	
       <span class="right" style="display:none;"><a href="/logout">LogOut</a> </span>
 	<h2>Quiz: crazy questions</h2>
     </header>
 	<nav class='main' id='n1' role='navigation'>
 		<span><a href='layout.php'>Home</a></span>
 		<span><a href='/quizzes'>Quizzes</a></span>
-		<span><input id="credits" name="credits" type= "submit" value="Credits"</span>
+		<span><input id="credits" name="credits" type= "submit" value="Credits"></span>
+		<span><input id="handlingQuizes" name="handlingQuizes" type="submit" value="handlingQuizes"></span>
 		<span><input id="galderaGehitu" type="submit" name="galderaGehitu" value="Galdera gehitu"></span>
 	</nav>
     <section class="main" id="s1">
@@ -70,7 +72,7 @@ if(isset($_GET['id'])){
 }
 else{
 	echo '<style type="text/css">
-        #galderaGehitu, #botoiAtera {
+        #galderaGehitu, #botoiAtera, #handlingQuizes {
             display: none;
         }
         </style>';
@@ -78,6 +80,13 @@ else{
 if(isset($_POST['galderaGehitu'], $_GET['id'])){
 	$id= $_GET['id'];
 	echo('<script>location.href="addQuestion.php?id='.$id.'"</script>');
+}
+if(isset($_POST['handlingQuizes'], $_GET['id'])){
+	$id= $_GET['id'];
+	echo('<script>location.href="handlingQuizes.php?id='.$id.'"</script>');
+}
+if(isset($_POST['handlingQuizes'])){
+	echo('<script>location.href="handlingQuizes.php" </script>');
 }
 if(isset($_POST['credits'], $_GET['id'])){
 	$id= $_GET['id'];
