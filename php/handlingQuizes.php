@@ -44,7 +44,7 @@
 			case 2: document.getElementById('egoera').innerHTML = "<b>Kargatzen2 ...</b>"; break;
 			case 3: document.getElementById('egoera').innerHTML = "Elkarrekintza ..."; break;
 			case 4: document.getElementById('egoera').innerHTML = "<b>AMAITUA</b>"; 
-					document.getElementById('emaitza').innerHTML = xhro.responseText;
+					if(xhro.status==200) document.getElementById('emaitza').innerHTML = xhro.responseText;
 		}
 		
 	}

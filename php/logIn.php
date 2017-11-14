@@ -24,7 +24,7 @@
 </html>
 <?php
 if (isset($_POST['korreoa']) && isset($_POST['pasahitza'])){
-	$zenb=1;
+	$zenb=0;
 	include "configure.php";
 	global $esteka;
 	$korreoa = $_POST['korreoa'];
