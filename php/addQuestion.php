@@ -92,7 +92,7 @@
 if (isset($_POST['galdera'], $_POST['zuzena'], $_POST['oker1'], $_POST['oker2'], $_POST['oker3'], $_POST['zailtasuna'], $_POST['arloa'], $_POST['botoiErantzuna'], $_GET['id'] ))
     {
 $id=$_GET['id'];
-	$zenb=0;
+	$zenb=1;
 	include "configure.php";
 	global $esteka;
 $errorea = "GAIZKI SARTUTAKO DATUAK: ";
