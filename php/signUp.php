@@ -81,43 +81,65 @@
 <?php
  
 if(isset($_POST['korreoa'], $_POST['deitura'], $_POST['nick'], $_POST['pasahitza'], $_POST['pasahitza2'])){
-	$zenb=1;
-	include "configure.php";
-	global $esteka;
-	$sql = "SELECT * FROM erabiltzaileak";
-	$ema = mysqli_query($esteka, $sql);
-	if (!$ema){
-		echo("Errorea datuak sartzerakoan: ". mysqli_error($esteka));
-	} 
-	$aurkitua = False;
-	while($row = mysqli_fetch_assoc($ema)){
-		if($row['Korreoa'] == $_POST['korreoa']){
-			$aurkitua = True;	
-		}
-	}
-	if(!$aurkitua){
-		$sql = "INSERT INTO erabiltzaileak VALUES(DEFAULT, '$_POST[korreoa]' , '$_POST[deitura]' , '$_POST[nick]' , '$_POST[pasahitza]')";
-		$ema = mysqli_query($esteka, $sql);
-		if (!$ema){
-			echo("Errorea datuak sartzerakoan: ". mysqli_error($esteka));
-		}
-		else{
-			$sql = "SELECT ID FROM erabiltzaileak WHERE korreoa='$_POST[korreoa]'";
+	require_once('../lib/nusoap.php');
+	require_once('../lib/class.wsdlcache.php');
+	$soapclient = new nusoap_client('http://ehusw.es/rosa/webZerbitzuak/egiaztatuMatrikula.php?wsdl', true);
+	$soapclient->call('egiaztatuE', array('x'=>$_POST['korreoa']));
+	$doc = new DOMDocument();
+	$doc->loadXML(strstr($soapclient->response, '<'));
+	$mezua = $doc->getElementsByTagName('z');
+	if($mezua[0]->nodeValue=="BAI"){
+		$soapclient2 = new nusoap_client('http://uarribillaga.000webhostapp.com/Lab6/php/egiaztatuPasahitza.php?wsdl', true);
+		$soapclient2->call('bilatu', array('x'=>$_POST['pasahitza']));
+		$doc2 = new DOMDocument();
+		$doc2->loadXML(strstr($soapclient2->response, '<'));
+		$mezua2 = $doc2->getElementsByTagName('z');
+		if($mezua2[0]->nodeValue=="baliozkoa"){
+			$zenb=1;
+			include "configure.php";
+			global $esteka;
+			$sql = "SELECT * FROM erabiltzaileak";
 			$ema = mysqli_query($esteka, $sql);
 			if (!$ema){
-				echo("Errorea datuak sartzerakoan 1: ". mysqli_error($esteka));
+				echo("Errorea datuak sartzerakoan: ". mysqli_error($esteka));
+			} 
+			$aurkitua = False;
+			while($row = mysqli_fetch_assoc($ema)){
+				if($row['Korreoa'] == $_POST['korreoa']){
+					$aurkitua = True;	
+				}
+			}
+			if(!$aurkitua){
+				$sql = "INSERT INTO erabiltzaileak VALUES(DEFAULT, '$_POST[korreoa]' , '$_POST[deitura]' , '$_POST[nick]' , '$_POST[pasahitza]')";
+				$ema = mysqli_query($esteka, $sql);
+				if (!$ema){
+					echo("Errorea datuak sartzerakoan: ". mysqli_error($esteka));
+				}
+				else{
+					$sql = "SELECT ID FROM erabiltzaileak WHERE korreoa='$_POST[korreoa]'";
+					$ema = mysqli_query($esteka, $sql);
+					if (!$ema){
+						echo("Errorea datuak sartzerakoan 1: ". mysqli_error($esteka));
+					}
+					else{
+						$row = mysqli_fetch_assoc($ema);
+						echo('<script>location.href="logIn.php"</script>');
+						exit();
+					}
+				}
 			}
 			else{
-				$row = mysqli_fetch_assoc($ema);
-				echo('<script>location.href="logIn.php"</script>');
-				exit();
+				echo('<span style="color: red;">KORREOA JADA EXISTITZEN DA</span></br>');
 			}
-		
+			mysqli_close($esteka);
+		}
+		else{
+			echo('<span style="color: red;">PASAHITZA EZ DA BALIOZKOA</span></br>');
 		}
 	}
-	else{
-		echo('<span style="color: red;">KORREOA JADA EXISTITZEN DA</span>');
-	}
-	mysqli_close($esteka);
+	else {
+		echo('<span style="color: red;">KORREO HAU DUEN PERTSONA EZ DAGO WEB SISTEMAN APUNTATURIK</span></br>');
+	} 
+	
 }	
 ?>
