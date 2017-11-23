@@ -36,10 +36,11 @@
     </body>
 </html>
 <?php
-if(isset($_GET['id'], $_POST['botoiAtera'])){
+/*
+if(isset($_SESSION['id'], $_POST['botoiAtera'])){
 	$id=$_GET['id'];
-	echo('<script>location.href="layout.php?id='.$id.'"</script>');
-}
+	echo('<script>location.href="layout.php?id="</script>');
+}*/
 if(isset($_POST['botoiAtera'])){
 	echo('<script>location.href="layout.php"</script>');
 }

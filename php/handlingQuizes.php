@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<?php session_start(); ?>
 <html>
   <head>
     <meta name="tipo_contenido" content="text/html;" http-equiv="content-type" charset="utf-8">
@@ -53,7 +54,6 @@
 		xhro.send();
 	}
 	function galderaSartu(){
-		var id = window.location.href.split('id=')[1];
 		xhro.open("POST", "addQuestionAJAX.php", true);
 		xhro.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 		var galdera = document.getElementById('galdera').value;
@@ -63,15 +63,21 @@
 		var oker3 = document.getElementById('oker3').value;
 		var arloa = document.getElementById('arloa').value;
 		var zailtasuna = document.getElementById('zailtasuna').value;
-		xhro.send("galdera="+galdera+"&zuzena="+zuzena+"&oker1="+oker1+"&oker2="+oker2+"&oker3="+oker3+"&arloa="+arloa+"&zailtasuna="+zailtasuna+"&id="+id);
+		xhro.send("galdera="+galdera+"&zuzena="+zuzena+"&oker1="+oker1+"&oker2="+oker2+"&oker3="+oker3+"&arloa="+arloa+"&zailtasuna="+zailtasuna);
 	}
 </script>
 </html>
 
 <?php 
-if(isset($_POST['botoiAtera'], $_GET['id'])){
-	$id= $_GET['id'];
-	echo('<script>location.href="layout.php?id='.$id.'"</script>');
+if(!isset($_SESSION['id'], $_SESSION['mota']) || $_SESSION['mota']==="irakaslea"){
+	echo '<style type="text/css">
+	body {
+		display:none;
+	}
+	</style>';
+}
+else{
+	echo($_SESSION['mota']);
 }
 if(isset($_POST['botoiAtera'])){
 	echo('<script>location.href="layout.php"</script>');

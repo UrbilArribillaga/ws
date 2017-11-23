@@ -1,4 +1,5 @@
 ﻿<!DOCTYPE html>
+<?php session_start(); ?>
 <html>
   <head>
     <meta name="tipo_contenido" content="text/html;" http-equiv="content-type" charset="utf-8">
@@ -28,10 +29,10 @@
     </header>
 	<nav class='main' id='n1' role='navigation'>
 		<span><a href='layout.php'>Home</a></span>
-		<span><a href='/quizzes'>Quizzes</a></span>
 		<span><input id="credits" name="credits" type= "submit" value="Credits"></span>
 		<span><input id="handlingQuizes" name="handlingQuizes" type="submit" value="handlingQuizes"></span>
-		<span><input id="galderaGehitu" type="submit" name="galderaGehitu" value="Galdera gehitu"></span>
+		<span><input id="reviewingQuizes" type="submit" name="reviewingQuizes" value="reviewingQuizes"></span>
+		<span><input id="jokatu" type="button" name="jokatu" value="jokatu"></span>
 	</nav>
     <section class="main" id="s1">
     
@@ -63,36 +64,30 @@ $(document).ready(function(){
 </body>
 </html>
 <?php
-if(isset($_GET['id'])){
+if(!isset($_SESSION['id'], $_SESSION['mota'])){
 	echo '<style type="text/css">
-        #botoiErregistratu, #botoiLogin {
-            display: none;
-        }
+        #handlingQuizes, #reviewingQuizes, #botoiAtera{
+			display:none;
+		} 
         </style>';		
 }
-else{
-	echo '<style type="text/css">
-        #galderaGehitu, #botoiAtera, #handlingQuizes {
-            display: none;
-        }
-        </style>';
+else {
+	if ($_SESSION['mota']=="ikaslea"){
+		echo '<style type="text/css">
+			#reviewingQuizes, #botoiLogin, #botoiErregistratu, #jokatu {
+				display: none;
+			}
+			</style>';
 }
-if(isset($_POST['galderaGehitu'], $_GET['id'])){
-	$id= $_GET['id'];
-	echo('<script>location.href="addQuestion.php?id='.$id.'"</script>');
+	else{
+		echo '<style type="text/css">
+			#handlingQuizes, #botoiLogin, #botoiErregistratu,#jokatu {
+				display: none;
+			}
+			</style>';
 }
-if(isset($_POST['handlingQuizes'], $_GET['id'])){
-	$id= $_GET['id'];
-	echo('<script>location.href="handlingQuizes.php?id='.$id.'"</script>');
 }
-if(isset($_POST['handlingQuizes'])){
-	echo('<script>location.href="handlingQuizes.php" </script>');
-}
-if(isset($_POST['credits'], $_GET['id'])){
-	$id= $_GET['id'];
-	echo('<script>location.href="credits.php?id='.$id.'"</script>');
-}
-if(isset($_POST['credits'])){
-	echo('<script>location.href="credits.php"</script>');
-}
+if(isset($_POST['reviewingQuizes'])) echo('<script>location.href="reviewingQuizes.php"</script>');
+if(isset($_POST['handlingQuizes'])) echo('<script>location.href="handlingQuizes.php"</script>');
+if(isset($_POST['credits'])) echo('<script>location.href="credits.php"</script>');
 ?>

@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<?php
+	ini_set("session.use_cookies", 1);
+	session_start(); 
+?>
 <html>
 	<head>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -6,6 +10,9 @@
 		<title> LOG IN </title>
 	</head>
 	<body>
+	<?php 
+	
+	?>
 		<form id="login" name="login" action="" method="post">
 			<h1>LOG IN</h1>
 			<label>Korreoa</label><input id="korreoa" name="korreoa" type="text"><br/><br/>
@@ -24,7 +31,7 @@
 </html>
 <?php
 if (isset($_POST['korreoa']) && isset($_POST['pasahitza'])){
-	$zenb=1;
+	$zenb=0;
 	include "configure.php";
 	global $esteka;
 	$korreoa = $_POST['korreoa'];
@@ -33,8 +40,15 @@ if (isset($_POST['korreoa']) && isset($_POST['pasahitza'])){
 	if (mysqli_num_rows($result) > 0){
 		$row = mysqli_fetch_assoc($result);
 		if(strcmp($row['Pasahitza'], $_POST['pasahitza']) == 0){
-			echo('<script>location.href="layout.php?id='.$row['ID'].'"</script>');
-			exit();
+			$_SESSION['id']= $row['ID'];
+			if(strcmp($korreoa, "web000@ehu.es")==0){
+				$_SESSION['mota']="irakaslea";
+				echo('<script>location.href="reviewingQuizes.php"</script>');
+				}
+			else{ 
+				$_SESSION['mota']="ikaslea";
+				echo('<script>location.href="handlingQuizes.php"</script>');
+			}
 		}
 		else{
 			echo('<span style="color: red;">KORREO EDO PASAHITZA OKERRA</span>');

@@ -1,7 +1,7 @@
 <?php 
 if(isset($_GET['id'])){
 	$id= $_GET['id'];
-	$zenb=1;
+	$zenb=0;
 	include "configure.php";
 	global $esteka;
 	$sql = "SELECT * FROM questions";
