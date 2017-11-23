@@ -69,6 +69,7 @@
 </html>
 
 <?php 
+echo('proba');
 if(!isset($_SESSION['id'], $_SESSION['mota']) || $_SESSION['mota']==="irakaslea"){
 	echo '<style type="text/css">
 	body {
