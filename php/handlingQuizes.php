@@ -69,7 +69,7 @@
 </html>
 
 <?php 
-echo('proba');
+
 if(!isset($_SESSION['id'], $_SESSION['mota']) || $_SESSION['mota']==="irakaslea"){
 	echo '<style type="text/css">
 	body {
@@ -77,8 +77,6 @@ if(!isset($_SESSION['id'], $_SESSION['mota']) || $_SESSION['mota']==="irakaslea"
 	}
 	</style>';
 }
-else{
-	echo($_SESSION['mota']);
 }
 if(isset($_POST['botoiAtera'])){
 	echo('<script>location.href="layout.php"</script>');
