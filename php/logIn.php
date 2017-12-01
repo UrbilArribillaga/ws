@@ -1,8 +1,8 @@
-<!DOCTYPE html>
 <?php
 	ini_set("session.use_cookies", 1);
 	session_start(); 
 ?>
+<!DOCTYPE html>
 <html>
 	<head>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -31,7 +31,7 @@
 </html>
 <?php
 if (isset($_POST['korreoa']) && isset($_POST['pasahitza'])){
-	$zenb=0;
+	$zenb=1;
 	include "configure.php";
 	global $esteka;
 	$korreoa = $_POST['korreoa'];

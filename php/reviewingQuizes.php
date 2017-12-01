@@ -1,5 +1,5 @@
-<!DOCTYPE html>
 <?php session_start(); ?>
+<!DOCTYPE html>
 <html>
   <head>
     <meta name="tipo_contenido" content="text/html;" http-equiv="content-type" charset="utf-8">
@@ -131,7 +131,7 @@
 					$errorea .= " [arloa]";
 				}
 				if($balioztatu){
-					$zenb=0;
+					$zenb=1;
 					include "configure.php";
 					global $esteka;
 					$zenbakia = $_GET['zenb'];

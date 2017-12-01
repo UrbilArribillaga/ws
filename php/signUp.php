@@ -95,7 +95,7 @@ if(isset($_POST['korreoa'], $_POST['deitura'], $_POST['nick'], $_POST['pasahitza
 		$doc2->loadXML(strstr($soapclient2->response, '<'));
 		$mezua2 = $doc2->getElementsByTagName('z');
 		if($mezua2[0]->nodeValue=="baliozkoa"){
-			$zenb=0;
+			$zenb=1;
 			include "configure.php";
 			global $esteka;
 			$sql = "SELECT * FROM erabiltzaileak";

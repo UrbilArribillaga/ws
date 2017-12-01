@@ -3,7 +3,7 @@ session_start();
 if (isset($_POST['galdera'], $_POST['zuzena'], $_POST['oker1'], $_POST['oker2'], $_POST['oker3'], $_POST['zailtasuna'], $_POST['arloa'], $_SESSION['id'], $_SESSION['mota']) && $_SESSION['mota']==="ikaslea")
 {
 	$id= $_POST['id'];
-	$zenb=0;
+	$zenb=1;
 	include "configure.php";
 	global $esteka;
 $errorea = "GAIZKI SARTUTAKO DATUAK: ";

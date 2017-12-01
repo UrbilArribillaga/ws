@@ -1,5 +1,5 @@
-<!DOCTYPE html>
 <?php session_start(); ?>
+<!DOCTYPE html>
 <html>
   <head>
     <meta name="tipo_contenido" content="text/html;" http-equiv="content-type" charset="utf-8">
@@ -77,7 +77,7 @@ if(!isset($_SESSION['id'], $_SESSION['mota']) || $_SESSION['mota']==="irakaslea"
 	}
 	</style>';
 }
-}
+
 if(isset($_POST['botoiAtera'])){
 	echo('<script>location.href="layout.php"</script>');
 }

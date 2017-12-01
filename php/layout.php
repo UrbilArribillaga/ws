@@ -1,5 +1,5 @@
-﻿<!DOCTYPE html>
-<?php session_start(); ?>
+﻿<?php session_start(); ?>
+<!DOCTYPE html>
 <html>
   <head>
     <meta name="tipo_contenido" content="text/html;" http-equiv="content-type" charset="utf-8">
