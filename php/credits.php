@@ -1,9 +1,19 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
     <head>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <meta charset="utf-8">
         <title>Kredituak</title>
+		<link rel='stylesheet' type='text/css' href='http://uarribillaga.000webhostapp.com/Lab2/estiloak/style.css' />
+		<link rel='stylesheet' 
+			   type='text/css' 
+			   media='only screen and (min-width: 530px) and (min-device-width: 481px)'
+			   href='http://uarribillaga.000webhostapp.com/Lab2/estiloak/wide.css' />
+		<link rel='stylesheet' 
+			   type='text/css' 
+			   media='only screen and (max-width: 480px)'
+			   href='http://uarribillaga.000webhostapp.com/Lab2/estiloak/smartphone.css' />
         <style>
             body {
                 font-family: Arial, sans-serif;
@@ -27,6 +37,16 @@
          
     </head>
     <body>
+	<header class='main' id='h1'>
+	
+      <span class="right" style="display:none;"><a href="/logout">LogOut</a> </span>
+		<h2>Quiz: crazy questions</h2>
+		<?php if(isset($_SESSION['korreoa'])) {
+		echo("Erabiltzailea:" . $_SESSION['korreoa']);
+		}
+		else echo("Erabiltzailea: Anonimoa");
+			?>
+		</header>
 		<form id="credits", name="credits", action="" method="post"
         <h1>Egileak: Jokin Indias eta Urbil Arribillaga</h1>
         <h2>Software ingeniaritza, 3.maila</h2>

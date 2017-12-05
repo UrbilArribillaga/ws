@@ -5,7 +5,7 @@ require_once('../lib/class.wsdlcache.php');
 
 
 //name of the service
-$ns="http://uarribillaga.000webhostapp.com/Lab6/php/egiaztatuPasahitza.php?wsdl";
+$ns="http://localhost:1234/laborategiak/php/egiaztatuPasahitza.php?wsdl";
 $server = new soap_server;
 $server->configureWSDL('egiaztatu',$ns);
 $server->wsdl->schemaTargetNamespace=$ns;

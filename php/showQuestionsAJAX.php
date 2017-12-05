@@ -1,7 +1,7 @@
 <?php
 session_start();
 //questions.xml erakusteko
-if(isset($_SESSION['id'], $_SESSION['mota']) && $_SESSION['mota']==="ikaslea"){
+if(isset($_SESSION['korreoa'], $_SESSION['mota']) && $_SESSION['mota']==="ikaslea"){
 	$xml = simplexml_load_file("../xml/questions.xml");
 	echo "<table border = '1'> \n";
 	echo "<tr><td>Enuntziatua</td><td>Zailtasuna</td><td>Gaia</td></tr> \n";

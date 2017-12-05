@@ -26,6 +26,11 @@
 	
       <span class="right" style="display:none;"><a href="/logout">LogOut</a> </span>
 	<h2>Quiz: crazy questions</h2>
+	<?php if(isset($_SESSION['korreoa'])) {
+		echo("Erabiltzailea:" . $_SESSION['korreoa']);
+	}
+	else echo("Erabiltzailea: Anonimoa");
+		?>
     </header>
 	<nav class='main' id='n1' role='navigation'>
 		<span><a href='layout.php'>Home</a></span>
@@ -64,7 +69,7 @@ $(document).ready(function(){
 </body>
 </html>
 <?php
-if(!isset($_SESSION['id'], $_SESSION['mota'])){
+if(!isset($_SESSION['korreoa'], $_SESSION['mota'])){
 	echo '<style type="text/css">
         #handlingQuizes, #reviewingQuizes, #botoiAtera{
 			display:none;

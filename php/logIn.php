@@ -39,8 +39,8 @@ if (isset($_POST['korreoa']) && isset($_POST['pasahitza'])){
 	$result = mysqli_query($esteka, $sql);
 	if (mysqli_num_rows($result) > 0){
 		$row = mysqli_fetch_assoc($result);
-		if(strcmp($row['Pasahitza'], $_POST['pasahitza']) == 0){
-			$_SESSION['id']= $row['ID'];
+		if(password_verify($_POST['pasahitza'], $row['Pasahitza'])){
+			$_SESSION['korreoa']= $korreoa;
 			if(strcmp($korreoa, "web000@ehu.es")==0){
 				$_SESSION['mota']="irakaslea";
 				echo('<script>location.href="reviewingQuizes.php"</script>');
@@ -51,7 +51,7 @@ if (isset($_POST['korreoa']) && isset($_POST['pasahitza'])){
 			}
 		}
 		else{
-			echo('<span style="color: red;">KORREO EDO PASAHITZA OKERRA</span>');
+			echo('<span style="color: red;">PASAHITZAREKIN ARAZOAK</span>');
 		}
 	}
 	else{

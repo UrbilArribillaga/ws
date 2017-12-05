@@ -14,13 +14,11 @@
 		   media='only screen and (max-width: 480px)'	
 		   href='http://uarribillaga.000webhostapp.com/Lab2/estiloak/smartphone.css' />
   </head>
-  <body>
-		<header class='main' id='h1'>
-		
-		</header>
+  <body onload="nikSartutakoak()">
 		<form id="galderenF" name="galderenF" action="" method="post">
 			<header class='main' id='h1'>
 				<h2>galderak maneiatu</h2>
+				<?php echo("Erabiltzailea:" . $_SESSION['korreoa']);?>
 			</header>
 			<span><input type="button" id="botoiGehitu" name="botoiGehitu" onclick="galderaSartu()" value=" addQuestion"></input>
 			<input type="button" id="botoiErakutsi" name="botoiErakutsi" onclick="datuakEskatu()" value="showQuestions"></input></span><br/><br/>
@@ -31,13 +29,16 @@
 			<label>Erantzun okerra 3</label><input id="oker3" name="oker3" type="text" ><br/><br/>
 			<label>Galderaren zailtasuna</label><input id="zailtasuna" name="zailtasuna" type="text" ><br/><br/>
 			<label>Galderaren gai arloa</label><input id="arloa" name="arloa" type="text" ><br/><br/><br/>
-			<input id="botoiAtera" type="submit" name="botoiAtera" value="Hasierako orrialdea"></br></br>
+			<input id="botoiAtera" type="submit" name="botoiAtera" value="Hasierako orrialdea">
+			<label id="egindakoGalderak"></label> 
+			</br></br>
 			<span id="egoera"></span>
 			<div id="emaitza"></div>
 		</form>
 </body>
 <script language = "javascript">
     var xhro= new XMLHttpRequest();
+	var datuEguneratuak = setInterval(nikSartutakoak, 20000);
 	xhro.onreadystatechange = function(){
 		switch(xhro.readyState){
 			case 0: document.getElementById('egoera').innerHTML = "Hasi gabe ..."; break;
@@ -45,10 +46,20 @@
 			case 2: document.getElementById('egoera').innerHTML = "<b>Kargatzen2 ...</b>"; break;
 			case 3: document.getElementById('egoera').innerHTML = "Elkarrekintza ..."; break;
 			case 4: document.getElementById('egoera').innerHTML = "<b>AMAITUA</b>"; 
-					if(xhro.status==200) document.getElementById('emaitza').innerHTML = xhro.responseText;
+				var emaitza = xhro.responseText;
+				if(emaitza.search('nik egindako galderak/galdera guztiak:')==-1){
+					if(xhro.status==200) document.getElementById('emaitza').innerHTML =emaitza;
+					}
+				else {
+					if(xhro.status==200) document.getElementById('egindakoGalderak').innerHTML =emaitza;
+				}
 		}
-		
 	}
+	function nikSartutakoak(){
+		xhro.open("POST", "datuakEguneratu.php", true);
+		xhro.send();
+	}
+	
 	function datuakEskatu(){
 		xhro.open("POST", "showQuestionsAJAX.php", true);
 		xhro.send();
@@ -64,13 +75,22 @@
 		var arloa = document.getElementById('arloa').value;
 		var zailtasuna = document.getElementById('zailtasuna').value;
 		xhro.send("galdera="+galdera+"&zuzena="+zuzena+"&oker1="+oker1+"&oker2="+oker2+"&oker3="+oker3+"&arloa="+arloa+"&zailtasuna="+zailtasuna);
+		document.getElementById('galdera').value ="";
+		document.getElementById('zuzena').value ="";
+		document.getElementById('oker1').value ="";
+		document.getElementById('oker2').value ="";
+		document.getElementById('oker3').value ="";
+		document.getElementById('arloa').value ="";
+		document.getElementById('zailtasuna').value ="";
+		
 	}
+	
 </script>
 </html>
 
 <?php 
 
-if(!isset($_SESSION['id'], $_SESSION['mota']) || $_SESSION['mota']==="irakaslea"){
+if(!isset($_SESSION['korreoa'], $_SESSION['mota']) || $_SESSION['mota']==="irakaslea"){
 	echo '<style type="text/css">
 	body {
 		display:none;

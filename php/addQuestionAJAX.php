@@ -1,22 +1,13 @@
 <?php 
 session_start();
-if (isset($_POST['galdera'], $_POST['zuzena'], $_POST['oker1'], $_POST['oker2'], $_POST['oker3'], $_POST['zailtasuna'], $_POST['arloa'], $_SESSION['id'], $_SESSION['mota']) && $_SESSION['mota']==="ikaslea")
+if (isset($_POST['galdera'], $_POST['zuzena'], $_POST['oker1'], $_POST['oker2'], $_POST['oker3'], $_POST['zailtasuna'], $_POST['arloa'], $_SESSION['korreoa'], $_SESSION['mota']) && $_SESSION['mota']==="ikaslea")
 {
-	$id= $_POST['id'];
 	$zenb=1;
 	include "configure.php";
 	global $esteka;
 $errorea = "GAIZKI SARTUTAKO DATUAK: ";
 $balioztatu = True;
-
-$sql = "SELECT Korreoa FROM erabiltzaileak WHERE ID='$id'";
-$ema = mysqli_query($esteka, $sql);
-if (!$ema)
-{
-echo("Errorea query-a gauzatzerakoan: ". mysqli_error($esteka));
-}
-$row = mysqli_fetch_assoc($ema);
-$korreoa= $row['Korreoa'];
+$korreoa= $_SESSION['korreoa'];
 if(strlen(preg_replace('/\s+/', '', $_POST['galdera'])) < 10){
 	$balioztatu = False;
 	$errorea .= " [Galdera]";

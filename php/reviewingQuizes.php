@@ -5,11 +5,21 @@
     <meta name="tipo_contenido" content="text/html;" http-equiv="content-type" charset="utf-8">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<title>Galderak eguneratu</title>
+	<link rel='stylesheet' type='text/css' href='http://uarribillaga.000webhostapp.com/Lab2/estiloak/style.css' />
+	<link rel='stylesheet' 
+		   type='text/css' 
+		   media='only screen and (min-width: 530px) and (min-device-width: 481px)'
+		   href='http://uarribillaga.000webhostapp.com/Lab2/estiloak/wide.css' />
+	<link rel='stylesheet' 
+		   type='text/css' 
+		   media='only screen and (max-width: 480px)'	
+		   href='http://uarribillaga.000webhostapp.com/Lab2/estiloak/smartphone.css' />
   </head>
   <body>
-
-		<h1>Galderak</h1> 
-
+		<header class='main' id='h1'>
+			<h2>Galderak editatu</h2>
+			<?php echo("Erabiltzailea:" . $_SESSION['korreoa']);?>
+		</header>
 		<table>
 			<tbody>
 				<tr>
@@ -26,7 +36,7 @@
 				</tr>
 
 			<?php
-				$zenb=0;
+				$zenb=1;
 				include "configure.php";
 				global $esteka;
 				$sql = "SELECT * FROM questions";
@@ -69,6 +79,7 @@
 			<label>Galderaren zailtasuna</label><input id="zailtasuna" name="zailtasuna" type="text" ><br/><br/>
 			<label>Galderaren gai arloa</label><input id="arloa" name="arloa" type="text"><br/><br/>
 			<input id="botoiErantzuna" type="submit" name="botoiErantzuna" value="Galdera eguneratu"/>
+			<input id="botoiBorratu" type="submit" name="botoiBorratu" value="Galdera borratu" />
 			<input id="botoiAtera" type="submit" name="botoiAtera" value="Hasierako orrialdea"></br></br>
 		</form>
 	</body>
@@ -83,7 +94,7 @@
 </html>
 
 <?php 
-	if(!isset($_SESSION['id'], $_SESSION['mota']) || $_SESSION['mota']==="ikaslea"){
+	if(!isset($_SESSION['korreoa'], $_SESSION['mota']) || $_SESSION['mota']==="ikaslea"){
 	echo '<style type="text/css">
 	body {
 		display:none;
@@ -165,7 +176,28 @@
 			echo('<span style="color: red;">GALDERA BAT AUKERATU BEHAR DUZU</span></br>');
 		}
 	}
-	
+	if(isset($_POST['botoiBorratu'], $_GET['zenb'])){
+		$zenb=1;
+		include "configure.php";
+		global $esteka;
+		$zenbakia = $_GET['zenb'];
+		$sql = "DELETE FROM questions WHERE Zenbakia=$zenbakia";
+		if(mysqli_query($esteka, $sql)){
+			echo('<span style="color: black;">GALDERA ONDO BORRATU DA</span></br>');
+		}
+		else{
+			echo('<span style="color: red;">ERROREA GALDERA BORRATZERAKOAN span></br>');
+		}
+		mysqli_close($esteka);
+		echo '<style type="text/css">
+			#botoiEguneratu {
+			display: initial;
+			}
+			</style>';	
+	}
+	else{
+		echo('<span style="color: red;">GALDERA BAT AUKERATU BEHAR DUZU</span></br>');
+	}
 	}
 	if(isset($_POST['botoiAtera'])){
 		echo('<script>location.href="layout.php"</script>');

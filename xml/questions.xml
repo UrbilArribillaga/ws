@@ -26,17 +26,4 @@
 			<value>Hodiak</value>
 		</incorrectResponses>
 	</assessmentItem>
-	<assessmentItem complexity="5" subject="mikologia">
-		<itemBody>
-			<p>Eranztuna du</p>
-		</itemBody>
-		<correctResponse>
-			<value>Galanpernak</value>
-		</correctResponse>
-		<incorrectResponses>
-			<value>Gibel urdinak</value>
-			<value>Esnegorriak</value>
-			<value>Errotariak</value>
-		</incorrectResponses>
-	</assessmentItem>
-<assessmentItem complexity="3" subject="lolololololo"><itemBody><p>lolololololololoololololololo</p></itemBody><correctResponse><value>lololololo</value></correctResponse><incorrectResponses><value>lololololo</value><value>lolololololo</value><value>lolololololol</value></incorrectResponses></assessmentItem><assessmentItem complexity="2" subject="edfwregtrhytger"><itemBody><p>qwertyuioplkjhgfdsazxcvbnm</p></itemBody><correctResponse><value>qwertyujnbvfd</value></correctResponse><incorrectResponses><value>edfgfbd</value><value>wewfrghgfr</value><value>sdfghgf</value></incorrectResponses></assessmentItem><assessmentItem complexity="4" subject="65432"><itemBody><p>123456789987654321</p></itemBody><correctResponse><value>123</value></correctResponse><incorrectResponses><value>123</value><value>123</value><value>123</value></incorrectResponses></assessmentItem><assessmentItem complexity="3" subject="qqqqqqqqqqqqqqqq"><itemBody><p>qqqqqqqqqqqqqqqqqqqqqqqq</p></itemBody><correctResponse><value>qqqqqqqqqqqqqqqq</value></correctResponse><incorrectResponses><value>qqqqqqqqqqqqqq</value><value>qqqqqqqqqqqqqq</value><value>qqqqqqqqqqqqqqq</value></incorrectResponses></assessmentItem></assessmentItems>
+<assessmentItem complexity="3" subject="animaliak"><itemBody><p>dortokak zenbat hanka ditu?</p></itemBody><correctResponse><value>4</value></correctResponse><incorrectResponses><value>3</value><value>2</value><value>1</value></incorrectResponses></assessmentItem><assessmentItem complexity="4" subject="informatika"><itemBody><p>ordenagailuko teklatuak zenbat botoi ditu?</p></itemBody><correctResponse><value>62</value></correctResponse><incorrectResponses><value>34</value><value>27</value><value>123</value></incorrectResponses></assessmentItem><assessmentItem complexity="4" subject="osasuna"><itemBody><p>zenbat urte ditu nire aitonak</p></itemBody><correctResponse><value>123</value></correctResponse><incorrectResponses><value>43</value><value>16</value><value>-2</value></incorrectResponses></assessmentItem></assessmentItems>
