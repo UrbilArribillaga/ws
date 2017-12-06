@@ -100,6 +100,7 @@
 		display:none;
 	}
 	</style>';
+	echo('<script>location.href="layout.php"</script>');
 	}
 	else {
 	echo '<style type="text/css">
@@ -153,6 +154,36 @@
 					}
 					else{
 						echo('<span style="color: black;">DATUAK ONDO GORDE DIRA</span></br>');
+						$assessmentItems = simplexml_load_file("../xml/questions.xml");
+						foreach($assessmentItems->assessmentItem as $assessmentItem){
+								if($assessmentItem['id'] == $_GET['zenb']){
+									$dom=dom_import_simplexml($assessmentItem);
+									$dom->parentNode->removeChild($dom);
+								}
+							}
+						$assessmentItems->asXML("../xml/questions.xml");
+							$assessmentItem = $assessmentItems->addChild('assessmentItem');
+							$assessmentItem->addAttribute('complexity',$_POST['zailtasuna']);
+							$assessmentItem->addAttribute('subject',$_POST['arloa']);
+							$assessmentItem->addAttribute('id', $zenbakia);
+							$itemBody = $assessmentItem->addChild('itemBody');
+							$itemBody->addChild('p',$_POST['galdera']);
+							$correctResponse = $assessmentItem->addChild('correctResponse');
+							$correctResponse->addChild('value',$_POST['zuzena']);
+							$incorrectResponses = $assessmentItem->addChild('incorrectResponses');
+							$incorrectResponses-> addChild('value',$_POST['oker1']);
+							$incorrectResponses-> addChild('value',$_POST['oker2']);
+							$incorrectResponses-> addChild('value',$_POST['oker3']);
+							$xmlError = $assessmentItems->asXML('../xml/questions.xml');
+							if (!$xmlError){
+								$errorea = '<span style="color: red;">' . $errorea; 
+								$errorea .= "</span></br>";
+								echo($errorea);
+								echo('<span style="color: red;">DATUAK EZ DIRA XML FITXATEGIAN SARTU</span></br>');
+							}
+							else{
+								echo('<span style="color: red;">DATUAK XML FITXATEGIAN ONDO GORDE DIRA</span></br>');
+							}
 					}
 					mysqli_close($esteka);
 					echo '<style type="text/css">
@@ -184,6 +215,14 @@
 		$sql = "DELETE FROM questions WHERE Zenbakia=$zenbakia";
 		if(mysqli_query($esteka, $sql)){
 			echo('<span style="color: black;">GALDERA ONDO BORRATU DA</span></br>');
+			$assessmentItems = simplexml_load_file("../xml/questions.xml");
+			foreach($assessmentItems->assessmentItem as $assessmentItem){
+				if($assessmentItem['id'] == $_GET['zenb']){
+					$dom=dom_import_simplexml($assessmentItem);
+					$dom->parentNode->removeChild($dom);
+					}
+				}
+			$assessmentItems->asXML("../xml/questions.xml");
 		}
 		else{
 			echo('<span style="color: red;">ERROREA GALDERA BORRATZERAKOAN span></br>');

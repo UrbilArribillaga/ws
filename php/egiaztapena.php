@@ -11,13 +11,16 @@ if(isset($_POST['korreoa'])){
 	else echo "KDesegokia";
 	
 }
-else if(isset($_POST['pasahitza'])){
-	$soapclient = new nusoap_client('http://localhost:1234/laborategiak/php/egiaztatuPasahitza.php?wsdl', true);
+else if(isset($_POST['pasahitza']) && !empty($_POST['pasahitza'])){
+	$soapclient = new nusoap_client('http://uarribillaga.000webhostapp.com/Lab7/php/egiaztatuPasahitza.php?wsdl', true);
 	$soapclient->call('bilatu', array('x'=>$_POST['pasahitza']));
 	$doc = new DOMDocument();
 	$doc->loadXML(strstr($soapclient->response, '<'));
 	$mezua = $doc->getElementsByTagName('z');
 	if($mezua[0]->nodeValue=="baliozkoa")echo "PEgokia";
 	else echo "PDesegokia";
+}
+else{
+	echo('<script>location.href="layout.php"</script>');
 }
 ?>

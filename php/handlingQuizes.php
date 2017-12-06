@@ -96,6 +96,8 @@ if(!isset($_SESSION['korreoa'], $_SESSION['mota']) || $_SESSION['mota']==="iraka
 		display:none;
 	}
 	</style>';
+	
+	echo('<script>location.href="layout.php"</script>');
 }
 
 if(isset($_POST['botoiAtera'])){

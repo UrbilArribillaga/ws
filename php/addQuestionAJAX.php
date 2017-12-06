@@ -1,13 +1,14 @@
 <?php 
 session_start();
-if (isset($_POST['galdera'], $_POST['zuzena'], $_POST['oker1'], $_POST['oker2'], $_POST['oker3'], $_POST['zailtasuna'], $_POST['arloa'], $_SESSION['korreoa'], $_SESSION['mota']) && $_SESSION['mota']==="ikaslea")
+if(isset($_SESSION['korreoa'], $_SESSION['mota']) && $_SESSION['mota']==="ikaslea"){
+if (isset($_POST['galdera'], $_POST['zuzena'], $_POST['oker1'], $_POST['oker2'], $_POST['oker3'], $_POST['zailtasuna'], $_POST['arloa']))
 {
 	$zenb=1;
 	include "configure.php";
 	global $esteka;
 $errorea = "GAIZKI SARTUTAKO DATUAK: ";
 $balioztatu = True;
-$korreoa= $_SESSION['korreoa'];
+$korreo= $_SESSION['korreoa'];
 if(strlen(preg_replace('/\s+/', '', $_POST['galdera'])) < 10){
 	$balioztatu = False;
 	$errorea .= " [Galdera]";
@@ -39,7 +40,7 @@ if(strlen(preg_replace('/\s+/', '', $_POST['arloa'])) < 1){
 	$errorea .= " [arloa]";
 }
 if($balioztatu){
-$sql = "INSERT INTO questions VALUES(DEFAULT, '$korreoa' , '$_POST[galdera]' , '$_POST[zuzena]' , '$_POST[oker1]' , '$_POST[oker2]' , '$_POST[oker3]' , '$_POST[zailtasuna]' , '$_POST[arloa]' )";
+$sql = "INSERT INTO questions VALUES(DEFAULT, '$korreo' , '$_POST[galdera]' , '$_POST[zuzena]' , '$_POST[oker1]' , '$_POST[oker2]' , '$_POST[oker3]' , '$_POST[zailtasuna]' , '$_POST[arloa]' )";
 $ema = mysqli_query($esteka, $sql); 
 if (!$ema)
 {
@@ -47,6 +48,14 @@ echo("Errorea query-a gauzatzerakoan: ". mysqli_error($esteka));
 }
 else{
 	echo('DATUAK ONDO GORDE DIRA</br></br>');
+	$sql = "SELECT Zenbakia FROM questions WHERE korreoa='$korreo' AND galdera='$_POST[galdera]' AND zuzena ='$_POST[zuzena]' AND okerra1 = '$_POST[oker1]' AND okerra2 = '$_POST[oker2]' AND okerra3 = '$_POST[oker3]' AND zailtasuna= '$_POST[zailtasuna]' AND arloa='$_POST[arloa]'";
+	$ema = mysqli_query($esteka, $sql);
+	if(!$ema){
+		echo("Errorea query-a gauzatzerakoan: ". mysqli_error($esteka));
+	}
+	else {
+		$row = mysqli_fetch_assoc($ema);
+	}
 }
 	
 }
@@ -67,6 +76,7 @@ $xml = simplexml_load_file("../xml/questions.xml");
 $assessmentItem = $xml->addChild('assessmentItem');
 $assessmentItem->addAttribute('complexity',$_POST['zailtasuna']);
 $assessmentItem->addAttribute('subject',$_POST['arloa']);
+$assessmentItem->addAttribute('id', $row['Zenbakia']);
 
 $itemBody = $assessmentItem->addChild('itemBody');
 $itemBody->addChild('p',$_POST['galdera']);
@@ -97,4 +107,9 @@ else{
 	else{
 			echo('<span style="color: red;">EZ DIRA DATU GUZTIAK SARTU</span></br>');	
 	}
+}
+else{
+	echo('<script>location.href="layout.php"</script>');
+}
+	
 ?>

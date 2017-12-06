@@ -17,4 +17,7 @@ if(isset($_SESSION['korreoa'], $_SESSION['mota']) && $_SESSION['mota']==="ikasle
 	}
 	
 	}
+	else{
+		echo('<script>location.href="layout.php"</script>');
+	}
 ?>

@@ -64,4 +64,5 @@ if(isset($_SESSION['id'], $_POST['botoiAtera'])){
 if(isset($_POST['botoiAtera'])){
 	echo('<script>location.href="layout.php"</script>');
 }
+
 ?>

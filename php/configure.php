@@ -1,4 +1,5 @@
 <?php
+	if(isset($zenb)){
 	if($zenb==0){
 		$esteka = mysqli_connect("localhost", "root", "", "quiz");
 	}
@@ -10,5 +11,8 @@
 		echo ("Konexio hutxegitea MySQLra: " . mysqli_connect_error());
 		exit();
 	}
-
+	}
+else{
+	echo('<script>location.href="layout.php"</script>');
+}
 ?>

@@ -23,4 +23,7 @@ if(isset($_SESSION['korreoa'], $_SESSION['mota']) && $_SESSION['mota']== "ikasle
 	}
 	echo("nik egindako galderak/galdera guztiak: ".$niregalderakop . "/" . $galderakop );
 }
+else{
+	echo('<script>location.href="layout.php"</script>');
+}
 ?>
