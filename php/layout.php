@@ -37,7 +37,7 @@
 		<span><input id="credits" name="credits" type= "submit" value="Credits"></span>
 		<span><input id="handlingQuizes" name="handlingQuizes" type="submit" value="handlingQuizes"></span>
 		<span><input id="reviewingQuizes" type="submit" name="reviewingQuizes" value="reviewingQuizes"></span>
-		<span><input id="jokatu" type="button" name="jokatu" value="jokatu"></span>
+		<span><input id="jokatu" type="button" name="jokatu" value="jokatu" onclick="javascript:window.location.href='menua.php'"></span>
 	</nav>
     <section class="main" id="s1">
     

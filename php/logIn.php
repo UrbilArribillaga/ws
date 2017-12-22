@@ -18,16 +18,18 @@
 			<label>Korreoa</label><input id="korreoa" name="korreoa" type="text"><br/><br/>
 			<label>Pasahitza</label><input id="pasahitza" name="pasahitza" type="password"><br/><br/>
 			<input id="botoiaLogin" type="submit" value="Log in">
-			<input id="botoiAtzera" type="button" value="bueltatu">
-			</body>
-		</form>
-		<script>
-			$(document).ready(function(){
-				$("#botoiAtzera").click(function(){
-					location.href="layout.php"
-				});
+			<input id="botoiAtzera" type="button" value="Bueltatu">
+		</form></br>
+		<a href="passwordRecovery.php">Ez duzu pasahitza gogoratzen?</a>
+		
+	</body>
+	<script>
+		$(document).ready(function(){
+			$("#botoiAtzera").click(function(){
+				location.href="layout.php"
 			});
-		</script>
+		});
+	</script>
 </html>
 <?php
 if (isset($_POST['korreoa']) && isset($_POST['pasahitza'])){
